@@ -1,0 +1,232 @@
+{
+  "fecha": "2026-09-30 22:35",
+  "n_muestras": 976,
+  "n_bandas": 84,
+  "rango_nm": [
+    400.0,
+    1301.0
+  ],
+  "cubos": {
+    "folder_hint": "2px_84_bandas",
+    "mascara": true,
+    "estadistico": "trimmed_mean",
+    "rango_valido": [
+      -0.05,
+      1.5
+    ],
+    "tamano_cnn3d": 20,
+    "min_valido_bloque": 0.5
+  },
+  "test_size": 0.1,
+  "n_folds": 5,
+  "random_state": 42,
+  "preprocesamientos": [
+    "RAW",
+    "SG",
+    "ABS",
+    "ABS+SG"
+  ],
+  "cnn_preprocesamientos": [
+    "RAW",
+    "SG",
+    "ABS",
+    "ABS+SG"
+  ],
+  "target_transforms": {
+    "pH": [
+      "identity"
+    ],
+    "Ca": [
+      "identity",
+      "log1p"
+    ]
+  },
+  "cnn_target_transform": "auto",
+  "entradas_clasicos": {
+    "MAT": "firma .MAT (84)",
+    "CUBE_MEAN_STD": "cubo: media + desv. por banda (168)"
+  },
+  "cnn": {
+    "loss": "r2",
+    "max_epochs": 300,
+    "min_epochs": 10,
+    "patience": 30,
+    "smooth_window": 5,
+    "batch": 32,
+    "lr": 0.0003,
+    "weight_decay": 0.01,
+    "dropout": 0.3,
+    "width": {
+      "1D": 16,
+      "3D": 8
+    },
+    "augment": true,
+    "aug": [
+      0.02,
+      0.01,
+      0.01
+    ],
+    "tta_3d": true
+  },
+  "configuracion_ganadora": {
+    "pH": {
+      "Media (referencia)": {
+        "input": "-",
+        "preprocess": "-",
+        "target_transform": "-",
+        "param_name": "-",
+        "param_value": "-"
+      },
+      "PLSR": {
+        "input": "firma .MAT (84)",
+        "preprocess": "ABS+SG",
+        "target_transform": "identity",
+        "param_name": "n_components",
+        "param_value": "7"
+      },
+      "Ridge": {
+        "input": "firma .MAT (84)",
+        "preprocess": "ABS",
+        "target_transform": "identity",
+        "param_name": "alpha",
+        "param_value": "316.228"
+      },
+      "SVR": {
+        "input": "firma .MAT (84)",
+        "preprocess": "ABS+SG",
+        "target_transform": "identity",
+        "param_name": "C, gamma, epsilon",
+        "param_value": "10, 0.001, 0.1"
+      },
+      "RF": {
+        "input": "firma .MAT (84)",
+        "preprocess": "ABS+SG",
+        "target_transform": "identity",
+        "param_name": "n_estimators, max_features, min_samples_leaf",
+        "param_value": "300, sqrt, 5"
+      },
+      "PLSR · cubo media+desv": {
+        "input": "cubo: media + desv. por banda (168)",
+        "preprocess": "ABS+SG",
+        "target_transform": "identity",
+        "param_name": "n_components",
+        "param_value": "6"
+      },
+      "Ridge · cubo media+desv": {
+        "input": "cubo: media + desv. por banda (168)",
+        "preprocess": "ABS",
+        "target_transform": "identity",
+        "param_name": "alpha",
+        "param_value": "316.228"
+      },
+      "SVR · cubo media+desv": {
+        "input": "cubo: media + desv. por banda (168)",
+        "preprocess": "SG",
+        "target_transform": "identity",
+        "param_name": "C, gamma, epsilon",
+        "param_value": "10, 0.001, 0.1"
+      },
+      "RF · cubo media+desv": {
+        "input": "cubo: media + desv. por banda (168)",
+        "preprocess": "SG",
+        "target_transform": "identity",
+        "param_name": "n_estimators, max_features, min_samples_leaf",
+        "param_value": "300, sqrt, 5"
+      },
+      "CNN_1D": {
+        "input": "firma .MAT (84)",
+        "preprocess": "ABS+SG",
+        "target_transform": "identity",
+        "param_name": "épocas (mediana)",
+        "param_value": "11"
+      },
+      "CNN_3D": {
+        "input": "cubo 84x20x20",
+        "preprocess": "ABS+SG",
+        "target_transform": "identity",
+        "param_name": "épocas (mediana)",
+        "param_value": "50"
+      }
+    },
+    "Ca": {
+      "Media (referencia)": {
+        "input": "-",
+        "preprocess": "-",
+        "target_transform": "-",
+        "param_name": "-",
+        "param_value": "-"
+      },
+      "PLSR": {
+        "input": "firma .MAT (84)",
+        "preprocess": "ABS+SG",
+        "target_transform": "identity",
+        "param_name": "n_components",
+        "param_value": "11"
+      },
+      "Ridge": {
+        "input": "firma .MAT (84)",
+        "preprocess": "ABS+SG",
+        "target_transform": "identity",
+        "param_name": "alpha",
+        "param_value": "31.6228"
+      },
+      "SVR": {
+        "input": "firma .MAT (84)",
+        "preprocess": "ABS",
+        "target_transform": "identity",
+        "param_name": "C, gamma, epsilon",
+        "param_value": "10, 0.001, 0.1"
+      },
+      "RF": {
+        "input": "firma .MAT (84)",
+        "preprocess": "SG",
+        "target_transform": "identity",
+        "param_name": "n_estimators, max_features, min_samples_leaf",
+        "param_value": "300, sqrt, 5"
+      },
+      "PLSR · cubo media+desv": {
+        "input": "cubo: media + desv. por banda (168)",
+        "preprocess": "ABS+SG",
+        "target_transform": "identity",
+        "param_name": "n_components",
+        "param_value": "6"
+      },
+      "Ridge · cubo media+desv": {
+        "input": "cubo: media + desv. por banda (168)",
+        "preprocess": "ABS+SG",
+        "target_transform": "identity",
+        "param_name": "alpha",
+        "param_value": "100"
+      },
+      "SVR · cubo media+desv": {
+        "input": "cubo: media + desv. por banda (168)",
+        "preprocess": "ABS+SG",
+        "target_transform": "identity",
+        "param_name": "C, gamma, epsilon",
+        "param_value": "10, 0.001, 0.1"
+      },
+      "RF · cubo media+desv": {
+        "input": "cubo: media + desv. por banda (168)",
+        "preprocess": "SG",
+        "target_transform": "identity",
+        "param_name": "n_estimators, max_features, min_samples_leaf",
+        "param_value": "300, sqrt, 5"
+      },
+      "CNN_1D": {
+        "input": "firma .MAT (84)",
+        "preprocess": "SG",
+        "target_transform": "identity",
+        "param_name": "épocas (mediana)",
+        "param_value": "16"
+      },
+      "CNN_3D": {
+        "input": "cubo 84x20x20",
+        "preprocess": "SG",
+        "target_transform": "identity",
+        "param_name": "épocas (mediana)",
+        "param_value": "31"
+      }
+    }
+  },
+  "quick_mode": false
+}
